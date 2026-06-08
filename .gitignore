@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+video_editor_debug.log
+
+# Cache
+cache/
+*.json
+
+# Temporary files
+*.tmp
+temp_*
+*_temp_*
+*_segmentos.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build outputs
+*.exe
+*.spec
+AutoVideoEditor.spec
+
+# Video files (ejemplos)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+
+# Large binaries (no incluir en repo)
+ffmpeg.exe
+ffplay.exe
+ffprobe.exe
+libvlc.dll
+libvlccore.dll
+plugins/
+
+# User configs
+.video_editor_config.json
