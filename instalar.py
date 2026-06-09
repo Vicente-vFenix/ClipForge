@@ -21,6 +21,7 @@
 
 import sys
 import subprocess
+import importlib.util
 from pathlib import Path
 
 # Carpeta donde esta este instalador (la carpeta del programa)
@@ -30,6 +31,7 @@ CARPETA = Path(__file__).parent
 # Formato: (nombre para pip, nombre con el que se importa en Python)
 DEPENDENCIAS = [
     ("torch", "torch"),
+    ("torchaudio", "torchaudio"),
     ("numpy", "numpy"),
     ("python-vlc", "vlc"),
 ]
@@ -182,13 +184,19 @@ def instalar_dependencias():
 
     fallidas = []
     for nombre_pip, nombre_import in DEPENDENCIAS:
-        # Comprobar si ya esta instalada
+        # Comprobar si ya esta instalada.
+        # Usamos find_spec en lugar de importar el modulo: importar 'vlc'
+        # intentaria cargar libvlc.dll inmediatamente y, si las rutas de VLC
+        # no estan preparadas, tumbaria el instalador. find_spec solo comprueba
+        # que el paquete este instalado, sin ejecutarlo.
         try:
-            __import__(nombre_import)
+            ya_instalado = importlib.util.find_spec(nombre_import) is not None
+        except (ImportError, ValueError):
+            ya_instalado = False
+
+        if ya_instalado:
             print(f"  [YA INSTALADO] {nombre_pip}")
             continue
-        except ImportError:
-            pass
 
         print(f"  Instalando {nombre_pip} ...")
 
